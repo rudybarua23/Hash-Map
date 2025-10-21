@@ -1,4 +1,4 @@
-# Hash Map (Vanilla JavaScript)
+# Hash Map 
 
 A learning-focused implementation of a **hash map** using **separate chaining** (arrays as buckets) and **dynamic resizing**. Includes a simple browser test page and console-based examples.
 
@@ -16,7 +16,7 @@ A learning-focused implementation of a **hash map** using **separate chaining** 
 └─ hashmap.js        # Hash function, HashMap class, and example usage/tests
 ```
 
-How it works (quick overview)
+## How it works (quick overview)
 
 Hashing: computes an integer by iterating characters of the key, multiplying by 31 each step, then takes abs(hash % bucketsLength) to pick a bucket. 
 
