@@ -1,25 +1,27 @@
 # Hash Map 
 
-A learning-focused implementation of a **hash map** using **separate chaining** (arrays as buckets) and **dynamic resizing**. Includes a simple browser test page and console-based examples.
+A learning-focused implementation of a **hash map** in plain JS using **separate chaining** for collisions and **dynamic resizing** when the load factor is exceeded. Includes a minimal browser page and built-in console tests.
 
 ## ✨ Features
-- String-key hash function (polynomial rolling with prime **31**) and modulo bucket index. :contentReference[oaicite:0]{index=0}
-- Separate chaining (each bucket is an array of `{key, value}` pairs). :contentReference[oaicite:1]{index=1}
-- Auto-resize when `count / buckets.length > loadFactor` (defaults: `initialSize=16`, `loadFactor=0.75`). :contentReference[oaicite:2]{index=2}
-- Full basic API: `set`, `get`, `has`, `remove`, `length`, `clear`, `keys`, `values`, `entries`. :contentReference[oaicite:3]{index=3}
-- Example tests included at the bottom of the file (run in browser console or Node). :contentReference[oaicite:4]{index=4}
+- **Hashing:** polynomial rolling hash with prime **31** → `Math.abs(hash % bucketsLength)` (keeps index in range).
+- **Buckets:** array of arrays (each bucket holds `{ key, value }` pairs).
+- **Dynamic resize:** doubles capacity when `count / buckets.length > loadFactor` and **rehashes** entries.
+- **Default config:** `initialSize = 16`, `loadFactor = 0.75`.
+- **String keys** (per assignment).
 
 ## 📦 Project Structure
 ```text
 .
-├─ index.html        # Minimal page that loads hashmap.js and runs console tests
-└─ hashmap.js        # Hash function, HashMap class, and example usage/tests
+├─ index.html        # Loads hashmap.js and prints demo results to the console
+└─ hashmap.js        # hash(key, bucketsLen) + HashMap class + example tests
+
 ```
 
-## How it works (quick overview)
+## 🧩 How It Works 
 
-Hashing: computes an integer by iterating characters of the key, multiplying by 31 each step, then takes abs(hash % bucketsLength) to pick a bucket. 
+Hashing: iterates each character of the key, multiplying by 31 and adding charCodeAt, then takes abs(mod) to select a bucket index.
 
-Collision handling: each bucket stores an array of entries; lookups linearly scan within that bucket. 
+Collisions: handled via separate chaining—each bucket is an array you linearly scan for the key.
 
-Resizing: when the load factor threshold is exceeded, the table doubles in size and re-inserts all entries (rehash).
+Resizing: when count / buckets.length exceeds loadFactor, capacity doubles and entries are reinserted via set (so they land in the right buckets).
+
